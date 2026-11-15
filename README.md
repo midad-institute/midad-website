@@ -2,7 +2,7 @@
 
 The public website of **Midad Institute | معهد مِداد** — live one-to-one Quran, Tajweed, Hifz, Arabic and Islamic studies for non-Arabic speakers. English and Arabic (right-to-left).
 
-Built with Next.js (App Router). Bookings are stored in Supabase; email alerts go through Resend.
+Built with Next.js (App Router). Hosted on Netlify. Bookings are stored in Supabase; email alerts go through Resend.
 
 ## Pages
 
@@ -36,9 +36,9 @@ Without Supabase keys, bookings are only printed to the terminal in development.
 
 ## Going live
 
-1. **Supabase** — create a project, open *SQL Editor*, run `supabase/schema.sql`. Copy the project URL and the `service_role` key from *Project Settings › API*.
-2. **Vercel** — import this repository, add the environment variables from `.env.example`, deploy.
+1. **Supabase** — create a project, open *SQL Editor*, run `supabase/schema.sql`. Copy the project URL and the publishable key from *Project Settings › API Keys*. New bookings appear in *Table Editor › trial_bookings*.
+2. **Netlify** — import this repository (Next.js is detected automatically), add the environment variables from `.env.example`, deploy.
 3. **Resend** (optional) — verify your domain and add `RESEND_API_KEY`, `BOOKING_FROM_EMAIL` and `ADMIN_NOTIFY_EMAIL` to get an email for every new booking.
-4. **Domain** — add it in Vercel › Settings › Domains.
+4. **Domain** — add it in Netlify › Domain management.
 
 Fonts (Inter, Manrope, Reem Kufi, IBM Plex Sans Arabic, Amiri Quran) are self-hosted under the SIL Open Font License — see `app/fonts/OFL.txt`.
