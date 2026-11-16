@@ -19,6 +19,9 @@ type Booking = {
 };
 
 const oneOf = <T extends string>(v: unknown, list: readonly T[]): v is T => typeof v === "string" && (list as readonly string[]).includes(v);
+const trackAr: Record<string, string> = { noorani: "النورانية والتأسيس", tajweed: "التلاوة والتجويد", hifz: "الحفظ والإجازة", arabic: "اللغة العربية", islamic: "العلوم الشرعية" };
+const ageAr: Record<string, string> = { "5-8": "5–8", "9-12": "9–12", "13-17": "13–17", adult: "كبار" };
+const teacherAr: Record<string, string> = { male: "معلم", female: "معلمة", any: "لا يهم" };
 const clean = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
 export async function POST(req: Request) {
@@ -72,8 +75,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "store_failed" }, { status: 500 });
   }
 
+  const when = new Date(booking.slot_utc).toLocaleString("en-GB", { timeZone: "Africa/Cairo", dateStyle: "full", timeStyle: "short" });
+  const waLink = `https://wa.me/${booking.whatsapp.replace(/\D/g, "")}`;
+  const alerts: Promise<unknown>[] = [];
+
   if (resendKey && adminEmail) {
-    const when = new Date(booking.slot_utc).toLocaleString("en-GB", { timeZone: "Africa/Cairo", dateStyle: "full", timeStyle: "short" });
     const lines = [
       `New free trial booking`,
       ``,
@@ -83,21 +89,48 @@ export async function POST(req: Request) {
       `For: ${booking.who} · Age: ${booking.age_group}`,
       `Parent / student: ${booking.parent_name} / ${booking.student_name || "-"}`,
       `Email: ${booking.email}`,
-      `WhatsApp: ${booking.whatsapp} → https://wa.me/${booking.whatsapp.replace(/\D/g, "")}`,
+      `WhatsApp: ${booking.whatsapp} → ${waLink}`,
       `Notes: ${booking.notes || "-"}`,
     ];
-    await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: process.env.BOOKING_FROM_EMAIL || "Midad Institute <onboarding@resend.dev>",
-        to: [adminEmail],
-        reply_to: booking.email,
-        subject: `Free trial: ${booking.parent_name} — ${when}`,
-        text: lines.join("\n"),
-      }),
-    }).catch((e) => console.error("[book] email failed", e));
+    alerts.push(
+      fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from: process.env.BOOKING_FROM_EMAIL || "Midad Institute <onboarding@resend.dev>",
+          to: [adminEmail],
+          reply_to: booking.email,
+          subject: `Free trial: ${booking.parent_name} — ${when}`,
+          text: lines.join("\n"),
+        }),
+        signal: AbortSignal.timeout(8000),
+      }).catch((e) => console.error("[book] email failed", e)),
+    );
   }
+
+  // WhatsApp alert to the admin's own phone via CallMeBot (free, personal notifications only).
+  const waPhone = process.env.CALLMEBOT_PHONE;
+  const waKey = process.env.CALLMEBOT_APIKEY;
+  if (waPhone && waKey) {
+    const whenAr = new Date(booking.slot_utc).toLocaleString("ar-EG", { timeZone: "Africa/Cairo", weekday: "long", day: "numeric", month: "long", hour: "numeric", minute: "2-digit" });
+    const text = [
+      `*حجز حصة مجانية جديد* 🎉`,
+      `📅 ${whenAr} (القاهرة)`,
+      `📖 المسار: ${trackAr[booking.track] ?? booking.track}`,
+      `👤 ${booking.parent_name}${booking.student_name ? ` / ${booking.student_name}` : ""}`,
+      `🧒 السن: ${ageAr[booking.age_group ?? ""] ?? "-"} · المعلم: ${teacherAr[booking.teacher_preference ?? ""] ?? "-"}`,
+      `💬 ${waLink}`,
+      booking.notes ? `📝 ${booking.notes.slice(0, 300)}` : "",
+    ].filter(Boolean).join("\n");
+    const qs = new URLSearchParams({ phone: waPhone, apikey: waKey, text });
+    alerts.push(
+      fetch(`https://api.callmebot.com/whatsapp.php?${qs}`, { signal: AbortSignal.timeout(8000) })
+        .then(async (r) => { if (!r.ok) console.error("[book] whatsapp alert failed", r.status, await r.text()); })
+        .catch((e) => console.error("[book] whatsapp alert failed", e)),
+    );
+  }
+
+  await Promise.allSettled(alerts);
 
   return NextResponse.json({ ok: true, stored: true });
 }
