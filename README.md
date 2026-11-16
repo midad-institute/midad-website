@@ -41,7 +41,7 @@ Without Supabase keys, bookings are only printed to the terminal in development.
 2. **Netlify** — import this repository (Next.js is detected automatically), add the environment variables from `.env.example`, deploy.
 3. **Admin** — add your email to `public.admins` (see the end of `supabase/schema.sql`), open `/ar/admin`, create a password once, then confirm the account (email link, or mark it confirmed in Supabase › Authentication).
 4. **Resend** (optional) — verify your domain and add `RESEND_API_KEY`, `BOOKING_FROM_EMAIL` and `ADMIN_NOTIFY_EMAIL` to get an email for every new booking.
-5. **WhatsApp alert** (optional) — get a free key from CallMeBot on the admin's phone, then add `CALLMEBOT_PHONE` (with country code, e.g. +2010…) and `CALLMEBOT_APIKEY`.
+5. **Phone alerts** (optional) — Telegram: create a bot with @BotFather, send it /start, get your chat id from @userinfobot, then add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. WhatsApp (CallMeBot, free but unreliable): add `CALLMEBOT_PHONE` (with country code) and `CALLMEBOT_APIKEY`.
 6. **Domain** — add it in Netlify › Domain management.
 
 Fonts (Inter, Manrope, Reem Kufi, IBM Plex Sans Arabic, Amiri Quran) are self-hosted under the SIL Open Font License — see `app/fonts/OFL.txt`.

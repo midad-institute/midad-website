@@ -108,10 +108,12 @@ export async function POST(req: Request) {
     );
   }
 
-  // WhatsApp alert to the admin's own phone via CallMeBot (free, personal notifications only).
+  // Short Arabic alert for the admin's phone (Telegram and/or WhatsApp via CallMeBot).
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChat = process.env.TELEGRAM_CHAT_ID;
   const waPhone = process.env.CALLMEBOT_PHONE;
   const waKey = process.env.CALLMEBOT_APIKEY;
-  if (waPhone && waKey) {
+  if ((tgToken && tgChat) || (waPhone && waKey)) {
     const whenAr = new Date(booking.slot_utc).toLocaleString("ar-EG", { timeZone: "Africa/Cairo", weekday: "long", day: "numeric", month: "long", hour: "numeric", minute: "2-digit" });
     const text = [
       `*حجز حصة مجانية جديد* 🎉`,
@@ -122,12 +124,28 @@ export async function POST(req: Request) {
       `💬 ${waLink}`,
       booking.notes ? `📝 ${booking.notes.slice(0, 300)}` : "",
     ].filter(Boolean).join("\n");
-    const qs = new URLSearchParams({ phone: waPhone, apikey: waKey, text });
-    alerts.push(
-      fetch(`https://api.callmebot.com/whatsapp.php?${qs}`, { signal: AbortSignal.timeout(8000) })
-        .then(async (r) => { if (!r.ok) console.error("[book] whatsapp alert failed", r.status, await r.text()); })
-        .catch((e) => console.error("[book] whatsapp alert failed", e)),
-    );
+
+    if (tgToken && tgChat) {
+      alerts.push(
+        fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: tgChat, text: text.replace(/\*/g, ""), disable_web_page_preview: true }),
+          signal: AbortSignal.timeout(8000),
+        })
+          .then(async (r) => { if (!r.ok) console.error("[book] telegram alert failed", r.status, await r.text()); })
+          .catch((e) => console.error("[book] telegram alert failed", e)),
+      );
+    }
+
+    if (waPhone && waKey) {
+      const qs = new URLSearchParams({ phone: waPhone, apikey: waKey, text });
+      alerts.push(
+        fetch(`https://api.callmebot.com/whatsapp.php?${qs}`, { signal: AbortSignal.timeout(8000) })
+          .then(async (r) => { if (!r.ok) console.error("[book] whatsapp alert failed", r.status, await r.text()); })
+          .catch((e) => console.error("[book] whatsapp alert failed", e)),
+      );
+    }
   }
 
   await Promise.allSettled(alerts);
