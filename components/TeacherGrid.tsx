@@ -35,7 +35,7 @@ export function TeacherGrid({ locale, t, bookHref }: { locale: Locale; t: Dict["
             <div className="row gap-12" style={{ alignItems: "center" }}>
               {x.photo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={x.photo} alt="" width={72} height={72} style={{ borderRadius: 999, objectFit: "cover", width: 72, height: 72 }} />
+                <img src={x.photo} alt={x.name[locale]} width={72} height={72} style={{ borderRadius: 999, objectFit: "cover", width: 72, height: 72 }} />
               ) : (
                 <div aria-hidden="true" style={{ width: 72, height: 72, borderRadius: 999, background: "var(--mist)" }} />
               )}
@@ -48,6 +48,12 @@ export function TeacherGrid({ locale, t, bookHref }: { locale: Locale; t: Dict["
               <p className="eyebrow" style={{ fontSize: 12 }}>{t.sanad}</p>
               <p className="muted" style={{ fontSize: 14 }}>{x.sanad[locale]}</p>
             </div>
+            {x.bio ? (
+              <details className="teacher-bio">
+                <summary>{t.about}</summary>
+                <p className="muted" style={{ fontSize: 14, lineHeight: 1.75, marginTop: 8 }}>{x.bio[locale]}</p>
+              </details>
+            ) : null}
             {x.recitation ? <audio controls preload="none" src={x.recitation} style={{ width: "100%" }} aria-label={t.listen} /> : null}
             <Link href={bookHref} className="btn btn-primary" style={{ marginTop: "auto" }}>
               {t.trial}

@@ -187,3 +187,6 @@ details.faq p { margin-top: 12px; color: var(--graphite); }
 html { --font-latin-display: var(--f-manrope); --font-latin-body: var(--f-inter); --font-arabic-display: var(--f-reem); --font-quran: var(--f-amiri); }
 html[lang="en"] { --font-body: var(--f-inter); --font-display: var(--f-manrope); --font-display-other: var(--f-reem); }
 html[lang="ar"] { --font-body: var(--f-plex), var(--f-inter); --font-display: var(--f-reem); --font-display-other: var(--f-manrope); }
+
+.teacher-bio summary { cursor: pointer; font-weight: 600; color: var(--teal); font-size: 15px; }
+.teacher-bio summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
