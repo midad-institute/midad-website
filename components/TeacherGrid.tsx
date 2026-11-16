@@ -55,11 +55,17 @@ export function TeacherGrid({ locale, t, bookHref }: { locale: Locale; t: Dict["
               </details>
             ) : null}
             {x.recitation ? <audio controls preload="none" src={x.recitation} style={{ width: "100%" }} aria-label={t.listen} /> : null}
-            <Link href={bookHref} className="btn btn-primary" style={{ marginTop: "auto" }}>
-              {t.trial}
-            </Link>
           </article>
         ))}
+      </div>
+      <div className="card row gap-16" style={{ alignItems: "center", justifyContent: "space-between", background: "var(--teal-tint)" }}>
+        <div className="stack gap-8" style={{ flex: "1 1 360px" }}>
+          <p style={{ fontWeight: 700, fontSize: 19 }}>{t.matchTitle}</p>
+          <p className="muted">{t.matchText}</p>
+        </div>
+        <Link href={bookHref} className="btn btn-primary">
+          {t.trial}
+        </Link>
       </div>
     </div>
   );
