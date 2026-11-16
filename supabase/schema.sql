@@ -39,3 +39,30 @@ create policy "website can insert new bookings"
     and char_length(coalesce(student_name, '')) <= 120
     and slot_utc > now()
   );
+
+-- Admin dashboard: only emails listed here can read and update bookings.
+create table if not exists public.admins (
+  email text primary key,
+  added_at timestamptz not null default now()
+);
+alter table public.admins enable row level security; -- no policies: not reachable through the API
+-- insert into public.admins (email) values ('you@example.com');
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1 from public.admins a
+    where a.email = lower(coalesce(auth.jwt() ->> 'email', ''))
+  );
+$$;
+revoke all on function public.is_admin() from public, anon;
+grant execute on function public.is_admin() to authenticated; -- lets the dashboard tell a signed-in admin from a non-admin
+
+create policy "admins can read bookings" on public.trial_bookings for select to authenticated using ((select public.is_admin()));
+create policy "admins can update bookings" on public.trial_bookings for update to authenticated
+  using ((select public.is_admin())) with check ((select public.is_admin()));
