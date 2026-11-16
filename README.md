@@ -13,6 +13,7 @@ Built with Next.js (App Router). Hosted on Netlify. Bookings are stored in Supab
 | `/{locale}/teachers` | Teacher profiles (from `lib/teachers.ts`) and how teachers are chosen |
 | `/{locale}/pricing` | Price calculator (USD / GBP / EUR), included features, FAQ |
 | `/{locale}/book` | Free trial booking in four steps, times shown in the visitor's time zone |
+| `/ar/admin` | Admin dashboard (Arabic): sign in, see bookings in Cairo time, set status, assign a teacher, message on WhatsApp. Not linked from the site and not indexed |
 
 ## Where to change things
 
@@ -38,7 +39,8 @@ Without Supabase keys, bookings are only printed to the terminal in development.
 
 1. **Supabase** — create a project, open *SQL Editor*, run `supabase/schema.sql`. Copy the project URL and the publishable key from *Project Settings › API Keys*. New bookings appear in *Table Editor › trial_bookings*.
 2. **Netlify** — import this repository (Next.js is detected automatically), add the environment variables from `.env.example`, deploy.
-3. **Resend** (optional) — verify your domain and add `RESEND_API_KEY`, `BOOKING_FROM_EMAIL` and `ADMIN_NOTIFY_EMAIL` to get an email for every new booking.
-4. **Domain** — add it in Netlify › Domain management.
+3. **Admin** — add your email to `public.admins` (see the end of `supabase/schema.sql`), open `/ar/admin`, create a password once, then confirm the account (email link, or mark it confirmed in Supabase › Authentication).
+4. **Resend** (optional) — verify your domain and add `RESEND_API_KEY`, `BOOKING_FROM_EMAIL` and `ADMIN_NOTIFY_EMAIL` to get an email for every new booking.
+5. **Domain** — add it in Netlify › Domain management.
 
 Fonts (Inter, Manrope, Reem Kufi, IBM Plex Sans Arabic, Amiri Quran) are self-hosted under the SIL Open Font License — see `app/fonts/OFL.txt`.
