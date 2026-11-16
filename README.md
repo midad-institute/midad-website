@@ -38,7 +38,7 @@ Without Supabase keys, bookings are only printed to the terminal in development.
 ## Going live
 
 1. **Supabase** — create a project, open *SQL Editor*, run `supabase/schema.sql`. Copy the project URL and the publishable key from *Project Settings › API Keys*. New bookings appear in *Table Editor › trial_bookings*.
-2. **Netlify** — import this repository (Next.js is detected automatically), add the environment variables from `.env.example`, deploy.
+2. **Hosting: Cloudflare Workers** (free, works from Egypt — `*.netlify.app` is blocked by several Egyptian ISPs). In Cloudflare › *Workers & Pages* › *Create* › *Import a repository*, pick this repo, set the build command to `npx opennextjs-cloudflare build` and the deploy command to `npx opennextjs-cloudflare deploy`. Add the secrets from `.env.example` under the worker's *Settings › Variables and Secrets*. The public Supabase values are already in `.env.production`. Test locally with `npm run preview`.
 3. **Admin** — add your email to `public.admins` (see the end of `supabase/schema.sql`), open `/ar/admin`, create a password once, then confirm the account (email link, or mark it confirmed in Supabase › Authentication).
 4. **Resend** (optional) — verify your domain and add `RESEND_API_KEY`, `BOOKING_FROM_EMAIL` and `ADMIN_NOTIFY_EMAIL` to get an email for every new booking.
 5. **Phone alerts** (optional) — Telegram: create a bot with @BotFather, send it /start, get your chat id from @userinfobot, then add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. WhatsApp (CallMeBot, free but unreliable): add `CALLMEBOT_PHONE` (with country code) and `CALLMEBOT_APIKEY`.

@@ -54,9 +54,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "missing_fields" }, { status: 422 });
   }
 
-  const url = process.env.SUPABASE_URL;
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   // A publishable key is enough: the database only lets the website insert new bookings, never read them.
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   const resendKey = process.env.RESEND_API_KEY;
   const adminEmail = process.env.ADMIN_NOTIFY_EMAIL;
 
