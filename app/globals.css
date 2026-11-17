@@ -190,3 +190,12 @@ html[lang="ar"] { --font-body: var(--f-plex), var(--f-inter); --font-display: va
 
 .teacher-bio summary { cursor: pointer; font-weight: 600; color: var(--teal); font-size: 15px; }
 .teacher-bio summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+
+/* Legal pages */
+.legal section { margin-top: 36px; }
+.legal h2 { font-family: var(--font-body), sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0; margin-bottom: 10px; color: var(--ink); }
+.legal p, .legal li { font-size: 16px; line-height: 1.8; color: var(--graphite); }
+.legal p + p { margin-top: 10px; }
+.legal ul { padding-inline-start: 22px; margin: 6px 0 0; display: grid; gap: 6px; }
+.booking-agree { font-size: 13px; line-height: 1.7; color: var(--graphite); }
+.booking-agree a { color: var(--teal); text-decoration: underline; }
