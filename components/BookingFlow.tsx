@@ -6,6 +6,8 @@ import type { Dict, TrackId } from "@/lib/content";
 import { fill, trackIds } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { trialDays, type Day } from "@/lib/availability";
+import { legal, legalUi } from "@/lib/legal";
+import { href } from "@/lib/i18n";
 
 type Props = { locale: Locale; t: Dict; initialTrack?: TrackId; homeHref: string };
 
@@ -175,6 +177,13 @@ export function BookingFlow({ locale, t, initialTrack, homeHref }: Props) {
                 <label htmlFor="bk-website">Website</label>
                 <input id="bk-website" tabIndex={-1} autoComplete="off" value={form.website} onChange={update("website")} />
               </div>
+              <p className="booking-agree">
+                {legalUi[locale].agree.split(/(\{terms\}|\{privacy\})/).map((part, i) =>
+                  part === "{terms}" ? <Link key={i} href={href(locale, "/terms")} target="_blank">{legal[locale].terms.title}</Link>
+                  : part === "{privacy}" ? <Link key={i} href={href(locale, "/privacy")} target="_blank">{legal[locale].privacy.title}</Link>
+                  : part,
+                )}
+              </p>
               {error ? <p className="error" role="alert">{error}</p> : null}
               <button type="submit" hidden />
             </form>

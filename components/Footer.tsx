@@ -2,9 +2,10 @@ import Link from "next/link";
 import { LogoMark } from "./Logo";
 import type { Dict } from "@/lib/content";
 import { href, type Locale } from "@/lib/i18n";
+import { CONTACT_EMAIL, legal, legalUi } from "@/lib/legal";
 
 export function Footer({ locale, t }: { locale: Locale; t: Dict }) {
-  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || CONTACT_EMAIL;
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   return (
     <footer className="site-footer">
@@ -35,6 +36,12 @@ export function Footer({ locale, t }: { locale: Locale; t: Dict }) {
                 WhatsApp
               </a>
             ) : null}
+          </div>
+          <div className="stack gap-8">
+            <h2>{legalUi[locale].legal}</h2>
+            <Link href={href(locale, "/terms")}>{legal[locale].terms.title}</Link>
+            <Link href={href(locale, "/privacy")}>{legal[locale].privacy.title}</Link>
+            <Link href={href(locale, "/safeguarding")}>{legal[locale].safeguarding.title}</Link>
           </div>
         </nav>
       </div>
