@@ -43,7 +43,7 @@ const en: Record<LegalSlug, LegalDoc> = {
           "Subscriptions are paid monthly, in advance. We will tell you how to pay before your first paid month.",
           "The launch price stays the same for you for as long as your subscription continues without a break.",
           "A 10% discount applies to each additional sibling from the same family.",
-          "You can stop your subscription at any time. It ends at the end of the month you have already paid for.",
+          "You can stop your subscription at any time. If you stop in the middle of a paid month, we refund the classes you have not taken yet that month.",
         ],
       },
       {
@@ -256,7 +256,7 @@ const ar: Record<LegalSlug, LegalDoc> = {
           "يُدفع الاشتراك شهريًا ومقدّمًا، وسنخبرك بطريقة الدفع قبل أول شهر مدفوع.",
           "يبقى سعر الإطلاق ثابتًا لك ما دام اشتراكك مستمرًا دون انقطاع.",
           "يُطبَّق خصم 10% على كل أخ أو أخت إضافيين من الأسرة نفسها.",
-          "يمكنك إيقاف اشتراكك في أي وقت، وينتهي في آخر الشهر الذي دفعته.",
+          "يمكنك إيقاف اشتراكك في أي وقت، وإذا أوقفته في منتصف شهر مدفوع فإننا نردّ لك قيمة الحصص التي لم تحضرها بعدُ في ذلك الشهر.",
         ],
       },
       {
