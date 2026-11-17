@@ -178,7 +178,6 @@ const en: Record<LegalSlug, LegalDoc> = {
           "We check every teacher's identity and qualifications before they teach.",
           "Teachers are trained in teaching children online and in this policy.",
           "Female teachers are available for girls and young children.",
-          "We are introducing formal background checks for all teachers.",
         ],
       },
       {
@@ -186,7 +185,6 @@ const en: Record<LegalSlug, LegalDoc> = {
         list: [
           "All classes take place on Zoom or Google Meet, using links we send to the parent.",
           "We do not record classes.",
-          "For children under 13, a parent or guardian should be at home during class and help set it up.",
           "Classes take place in a family area of the home, not behind a closed door, whenever possible.",
           "Teachers dress modestly and keep a quiet, appropriate background.",
         ],
@@ -387,7 +385,6 @@ const ar: Record<LegalSlug, LegalDoc> = {
           "نتحقق من هوية كل معلم ومؤهلاته قبل أن يبدأ التدريس.",
           "يتدرّب المعلمون على تعليم الأطفال عبر الإنترنت وعلى هذه السياسة.",
           "تتوفر معلمات للفتيات والأطفال الصغار.",
-          "نعمل على إدخال فحص رسمي للسجل الجنائي لجميع المعلمين.",
         ],
       },
       {
@@ -395,7 +392,6 @@ const ar: Record<LegalSlug, LegalDoc> = {
         list: [
           "تُعقد كل الحصص عبر Zoom أو Google Meet، بروابط نرسلها إلى ولي الأمر.",
           "لا نسجّل الحصص.",
-          "للأطفال دون 13 سنة، ينبغي أن يكون ولي الأمر أو الوصي في البيت أثناء الحصة، وأن يساعد في تجهيزها.",
           "يُفضَّل أن تكون الحصة في مكان مشترك من البيت، لا خلف باب مغلق.",
           "يلتزم المعلمون باللباس المحتشم وبخلفية هادئة ومناسبة.",
         ],
