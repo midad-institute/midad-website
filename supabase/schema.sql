@@ -66,3 +66,14 @@ grant execute on function public.is_admin() to authenticated; -- lets the dashbo
 create policy "admins can read bookings" on public.trial_bookings for select to authenticated using ((select public.is_admin()));
 create policy "admins can update bookings" on public.trial_bookings for update to authenticated
   using ((select public.is_admin())) with check ((select public.is_admin()));
+
+-- Privacy policy: delete trial bookings older than 12 months that did not lead to a subscription.
+-- Runs every day at 01:15 UTC (needs the pg_cron extension).
+create extension if not exists pg_cron;
+select cron.schedule(
+  'delete-old-trial-bookings',
+  '15 1 * * *',
+  $$delete from public.trial_bookings
+    where created_at < now() - interval '12 months'
+      and status <> 'subscribed'$$
+);
