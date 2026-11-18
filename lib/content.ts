@@ -247,6 +247,7 @@ const en = {
     faq: [
       ["Is the trial class really free?", "Yes. No card needed. You meet the teacher, we find your level, and you get your first class report."],
       ["How long does the launch price last?", "It stays locked for as long as your subscription stays active."],
+      ["How do I pay?", "Each month we email you a PayPal invoice. You can pay with a debit or credit card — no PayPal account needed."],
       ["Can I pay in pounds or euros?", "Yes — £7 or €7.5 per hour, billed through PayPal."],
       ["What if we miss a class?", "Cancel at least 4 hours before the class and you get a make-up class. A class missed without notice is counted."],
       ["Can I change my plan later?", "Yes — change class length or frequency; it applies from the next month."],
@@ -530,6 +531,7 @@ const ar: Dict = {
     faq: [
       ["هل الحصة التجريبية مجانية فعلًا؟", "نعم، ودون بطاقة دفع. تقابل المعلم، ونحدد مستواك، وتستلم أول تقرير حصة."],
       ["إلى متى يستمر سعر الإطلاق؟", "يبقى السعر ثابتًا ما دام اشتراكك مستمرًا."],
+      ["كيف أدفع؟", "نرسل إليك كل شهر فاتورة PayPal على بريدك الإلكتروني، ويمكنك الدفع ببطاقة بنكية دون الحاجة إلى حساب PayPal."],
       ["هل يمكنني الدفع بالجنيه الإسترليني أو اليورو؟", "نعم — 7£ أو 7.5€ للساعة، والدفع عبر PayPal."],
       ["ماذا لو فاتتنا حصة؟", "ألغِ قبل الحصة بـ 4 ساعات على الأقل وتحصل على حصة تعويضية. والحصة التي تفوت دون إشعار تُحسب."],
       ["هل يمكنني تغيير باقتي لاحقًا؟", "نعم — غيّر مدة الحصة أو عددها، والتغيير يسري من الشهر التالي."],
