@@ -147,7 +147,7 @@ html[dir="rtl"] .eyebrow { letter-spacing: 0; text-transform: none; font-size: 1
 .site-footer a:hover { color: var(--white); }
 .site-footer h2 { font-size: 15px; color: var(--paper); font-family: var(--font-body), sans-serif; letter-spacing: 0; }
 
-.wa-float { position: fixed; inset-inline-end: 24px; bottom: 24px; width: 60px; height: 60px; border-radius: 999px; background: var(--teal); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(19, 40, 58, 0.3); z-index: 40; }
+.wa-float { position: fixed; inset-inline-end: 24px; bottom: 24px; width: 60px; height: 60px; border-radius: 999px; background: #1FA855; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(19, 40, 58, 0.3); z-index: 40; }
 
 /* Choice buttons (calculator, filters, booking) */
 .choice {

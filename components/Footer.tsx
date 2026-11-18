@@ -56,7 +56,7 @@ export function WhatsAppButton({ label }: { label: string }) {
   const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
   if (!whatsapp) return null;
   return (
-    <a href={`https://wa.me/${whatsapp.replace(/\D/g, "")}`} className="wa-float" aria-label={label} target="_blank" rel="noopener noreferrer">
+    <a href={`https://wa.me/${whatsapp.replace(/\D/g, "")}`} className="wa-float" aria-label={label} title={label} target="_blank" rel="noopener noreferrer">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.5A9 9 0 1 1 21 12z" />
       </svg>
