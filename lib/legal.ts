@@ -40,7 +40,7 @@ const en: Record<LegalSlug, LegalDoc> = {
         h: "Subscriptions and prices",
         list: [
           "Prices are shown on our Pricing page per hour of teaching, in USD, GBP or EUR. Classes can be 30, 45 or 60 minutes.",
-          "Subscriptions are paid monthly, in advance. We will tell you how to pay before your first paid month.",
+          "Subscriptions are paid monthly, in advance, through a PayPal invoice we email to you. You can pay by card without a PayPal account.",
           "The launch price stays the same for you for as long as your subscription continues without a break.",
           "A 10% discount applies to each additional sibling from the same family.",
           "You can stop your subscription at any time. If you stop in the middle of a paid month, we refund the classes you have not taken yet that month.",
@@ -128,6 +128,7 @@ const en: Record<LegalSlug, LegalDoc> = {
           "Supabase — stores booking information (servers in Frankfurt, Germany)",
           "Resend — sends booking notification emails",
           "Telegram — sends a booking alert to our staff",
+          "PayPal — processes subscription payments (we never see your card details)",
           "Zoom or Google Meet — used for live classes",
         ],
       },
@@ -253,7 +254,7 @@ const ar: Record<LegalSlug, LegalDoc> = {
         h: "الاشتراكات والأسعار",
         list: [
           "الأسعار معروضة في صفحة الأسعار بحساب ساعة التدريس، بالدولار أو الجنيه الإسترليني أو اليورو. ومدة الحصة 30 أو 45 أو 60 دقيقة.",
-          "يُدفع الاشتراك شهريًا ومقدّمًا، وسنخبرك بطريقة الدفع قبل أول شهر مدفوع.",
+          "يُدفع الاشتراك شهريًا ومقدّمًا عبر فاتورة PayPal نرسلها إلى بريدك الإلكتروني، ويمكنك الدفع ببطاقة بنكية دون حساب PayPal.",
           "يبقى سعر الإطلاق ثابتًا لك ما دام اشتراكك مستمرًا دون انقطاع.",
           "يُطبَّق خصم 10% على كل أخ أو أخت إضافيين من الأسرة نفسها.",
           "يمكنك إيقاف اشتراكك في أي وقت، وإذا أوقفته في منتصف شهر مدفوع فإننا نردّ لك قيمة الحصص التي لم تحضرها بعدُ في ذلك الشهر.",
@@ -337,6 +338,7 @@ const ar: Record<LegalSlug, LegalDoc> = {
           "Supabase — تخزين بيانات الحجز (خوادم في فرانكفورت، ألمانيا)",
           "Resend — إرسال رسائل البريد الخاصة بالحجز",
           "Telegram — إرسال تنبيه الحجز إلى فريقنا",
+          "PayPal — معالجة مدفوعات الاشتراك (لا نطّلع على بيانات بطاقتك)",
           "Zoom أو Google Meet — لعقد الحصص المباشرة",
         ],
       },
